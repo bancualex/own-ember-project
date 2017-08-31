@@ -1,5 +1,21 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-{{welcome-page}}
-{{!-- Feel free to remove this! --}}
-
+<div class="Toolbar">
+    {{#if session.isAuthenticated}}
+        {{#link-to 'index'}}
+            <button class="toolbarButton"> Home</button>
+        {{/link-to}}
+        {{#link-to 'about'}}
+            <button class="toolbarButton"> About</button>
+        {{/link-to}}
+        {{#link-to 'shop'}}
+            <button class="toolbarButton"> Shop</button>
+        {{/link-to}}
+        {{#link-to 'cart'}}
+            <button class="toolbarButton"> Cart</button>
+        {{/link-to}}
+        <button class="toolbarButton"> <a {{action 'invalidateSession'}}>Logout</a></button>
+    {{else}}
+        {{#link-to 'login'}}<button class="toolbarButton"> Login</button>{{/link-to}}
+    {{/if}}
+    
+</div>
 {{outlet}}

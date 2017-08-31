@@ -1,0 +1,14 @@
+.displayItem{
+    border: 1px solid;
+    margin: 10px;
+    width: fit-content;
+    article{
+        padding: 10px;
+        .in-stock{
+            color: green;
+        }
+        .not-in-stock{
+            color: red;
+        }
+    }
+}
