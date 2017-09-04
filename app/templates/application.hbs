@@ -1,21 +1,21 @@
 <div class="Toolbar">
     {{#if session.isAuthenticated}}
-        {{#link-to 'index'}}
-            <button class="toolbarButton"> Home</button>
+        {{#link-to 'index' tagName='button' class="toolbarButton"}}
+            Home
         {{/link-to}}
-        {{#link-to 'about'}}
-            <button class="toolbarButton"> About</button>
+        {{#link-to 'about' tagName='button' class="toolbarButton"}}
+            About
         {{/link-to}}
-        {{#link-to 'shop'}}
-            <button class="toolbarButton"> Shop</button>
+        {{#link-to 'shop' tagName='button' class="toolbarButton"}}
+            Shop
         {{/link-to}}
-        {{#link-to 'cart'}}
-            <button class="toolbarButton"> Cart</button>
+        {{#link-to 'cart' tagName='button' class="toolbarButton"}}
+            Cart
+            <div class="cartItems" >{{cartLength}}</div>
         {{/link-to}}
         <button class="toolbarButton"> <a {{action 'invalidateSession'}}>Logout</a></button>
     {{else}}
-        {{#link-to 'login'}}<button class="toolbarButton"> Login</button>{{/link-to}}
+        {{#link-to 'login' tagName='button' class="toolbarButton"}} Login{{/link-to}}
     {{/if}}
-    
 </div>
 {{outlet}}

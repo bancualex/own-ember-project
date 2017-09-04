@@ -2,25 +2,27 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
     session: Ember.inject.service('session'),
+    cart: Ember.inject.service('cart-service'),
+    cartItems: Ember.computed('cart.items', function(){
+        console.log("Compute cart items")
+        return this.get('cart').items.length > 0 ? this.get('cart').items : JSON.parse(localStorage.cartItems);
+    }),
     actions: {
-    removeFromCart(item) {
-      var cartItems = this.get('session').get('data.cartItems');
-      var index = cartItems.indexOf(item);
-      console.log("Remove", index)
-      if (index > -1) {
-        cartItems.splice(index, 1);
-      this.get('session').set('data.cartItems', cartItems);
-}
-    },
-    addToCart(item) {
-            var cartItems = this.get('session').get('data.cartItems');
-            if(!cartItems)
-                cartItems = [];
-            // Verify if the same item is already in the cart
-            // let sameItems = cartItems.filter((obj) => {return JSON.stringify(obj) === JSON.stringify(item)})
-            // console.log("Same items", sameItems);
-            cartItems.push(item);
-            this.get('session').set('data.cartItems', cartItems);
-        }
-  }
+        removeFromCart(item) {
+            item = JSON.parse(JSON.stringify(item));
+            var cartItems = JSON.parse(localStorage.getItem('cartItems'));
+            var index;
+            cartItems.forEach((itm, i) => {
+                if (JSON.stringify(itm) === JSON.stringify(item)) {
+                    index = i;
+                }
+            });
+            if (index > -1) {
+                cartItems.splice(index, 1);
+            }
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            this.set('cartItems', cartItems);
+            this.get('cart').replaceItems(cartItems);
+        },
+    }
 });
