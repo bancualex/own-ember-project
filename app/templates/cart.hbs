@@ -1,1 +1,13 @@
-{{outlet}}
+<div> {{#if session.data.cartItems}}
+            <div> 
+                {{#each session.data.cartItems as |item|}}
+  {{#added-item actionName="removeFromCart" item=item}}
+  
+  {{/added-item}}
+{{/each}}
+ </div>
+        {{else}}
+            <div>Nu aveti iteme in cos</div>
+            
+        {{/if}} 
+</div>

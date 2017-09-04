@@ -1,1 +1,13 @@
-{{yield}}
+<div class="displayItem">
+    <article> 
+        <h2>{{item.title}}</h2> <br/>
+        <span> Description: {{item.description}} </span> <br/>
+        <span> Price: {{item.price}} RON </span><br/>
+        {{#if item.stock}}
+        <span class="in-stock"> In Stock </span><br/>
+        {{else}}
+        <span class="not-in-stock"> Not in Stock </span><br/>
+        {{/if}}
+        <button {{action "buttonClicked" item}}>Remove</button>
+    </article>
+</div>

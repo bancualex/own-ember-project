@@ -2,9 +2,17 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
     session: Ember.inject.service('session'),
-
     actions: {
-        addToCart(item) {
+    removeFromCart(item) {
+      var cartItems = this.get('session').get('data.cartItems');
+      var index = cartItems.indexOf(item);
+      console.log("Remove", index)
+      if (index > -1) {
+        cartItems.splice(index, 1);
+      this.get('session').set('data.cartItems', cartItems);
+}
+    },
+    addToCart(item) {
             var cartItems = this.get('session').get('data.cartItems');
             if(!cartItems)
                 cartItems = [];
@@ -14,5 +22,5 @@ export default Ember.Controller.extend({
             cartItems.push(item);
             this.get('session').set('data.cartItems', cartItems);
         }
-    }
+  }
 });
