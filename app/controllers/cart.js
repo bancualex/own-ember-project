@@ -4,8 +4,8 @@ export default Ember.Controller.extend({
     session: Ember.inject.service('session'),
     cart: Ember.inject.service('cart-service'),
     cartItems: Ember.computed('cart.items', function(){
-        console.log("Compute cart items")
         return this.get('cart').items.length > 0 ? this.get('cart').items : JSON.parse(localStorage.cartItems);
+        // return this.store.peekAll('added-item');
     }),
     actions: {
         removeFromCart(item) {
@@ -21,7 +21,6 @@ export default Ember.Controller.extend({
                 cartItems.splice(index, 1);
             }
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
-            this.set('cartItems', cartItems);
             this.get('cart').replaceItems(cartItems);
         },
     }

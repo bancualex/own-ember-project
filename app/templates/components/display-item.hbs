@@ -1,13 +1,13 @@
 <div class="displayItem">
     <article> 
         <h2>{{item.title}}</h2> <br/>
-        <span> description{{item.description}} </span> <br/>
+        <span> Description: {{item.description}} </span> <br/>
         <span> Price: {{item.price}} RON </span><br/>
         {{#if item.stock}}
         <span class="in-stock"> In Stock </span><br/>
         {{else}}
         <span class="not-in-stock"> Not in Stock </span><br/>
         {{/if}}
-        <button {{action "buttonClicked" item}}>Buy</button>
+        <button {{action "buttonClicked" item}} disabled={{if item.stock false true}} >Buy</button>
     </article>
 </div>
